@@ -65,7 +65,7 @@ body {
 .welcome {
     margin-top: 10px;
     margin-bottom: 30px;
-    color: orangered;
+    color: #ff4500;
     font-family: "pixel", sans-serif;
     gap: 8px;
     text-shadow: 0 0 2px rgba(255, 87, 34, 0.5);
@@ -100,7 +100,7 @@ body {
 .log-in-btn {
     width: 100%;
     padding: 12px;
-    background-color: orangered;
+    background-color: #ff4500;
     color: white;
     border: none;
     border-radius: 10px;
@@ -111,5 +111,5 @@ body {
 }
 
 .log-in-btn:hover {
-    background-color: #e58f6f;
+    background-color: #ea3f01;
 }
