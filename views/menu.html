@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Pixellari';
+            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        }
+
+        .font-pixel {
+            font-family: 'Pixellari', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel">
+    <nav
+        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full  shadow-md shadow-[#e5acb5]">
+        <div></div>
+        <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3 ">Make it happen today!</h1>
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <img class="w-12 group-hover:scale-115" src="/public/image/paw.png" alt="paw">
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-30 p-2 shadow-sm mt-1">
+                <li><a>My profile</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="flex justify-center mt-20">
+        <div class="grid grid-cols-[repeat(auto-fit,160px)] p-20 px-30 w-full max-w-6xl gap-10 justify-center">
+            <div
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer gap-5 active:scale-95">
+                <img class="w-19 h-19" src="/public/image/cat1.png" alt="cat1">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold">planner</h1>
+            </div>
+            <div
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer gap-5 active:scale-95">
+                <img class="w-19 h-19" src="/public/image/cat2.png" alt="cat2">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold">bank</h1>
+            </div>
+            <div
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer active:scale-95">
+                <img class="w-30 h-19 object-contain" src="/public/image/flower.png" alt="flower">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold text-center">mood tracker</h1>
+            </div>
+            <div
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer active:scale-95">
+                <img class="w-15 h-19 object-contain" src="/public/image/bow.png" alt="bow">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold text-center">Period Tracker</h1>
+            </div>
+
+        </div>
+
+</body>
+
+</html>
