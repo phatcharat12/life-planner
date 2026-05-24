@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Pixellari';
+            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        }
+
+        .font-pixel {
+            font-family: 'Pixellari', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel">
+    <nav
+        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full  shadow-md shadow-[#e5acb5]">
+        <div>
+            <a href="menu.html"><img class="w-9 hover:scale-115 active:scale-95" src="/public/image/home.png"
+                    alt="home"></a>
+        </div>
+
+        <div class="dropdown dropdown-center">
+            <div tabindex="0" role="button" class="flex items-center gap-3 cursor-pointer active:scale-95">
+                <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3 ">week1/52</h1>
+                <div>
+                    <img class="w-5" src="/public/image/triangle.png" alt="triangle">
+                </div>
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-30 p-2 shadow-sm mt-1">
+                <li><a>week 2/52</a></li>
+                <li><a>week 3/52</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button"
+                class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <img class="w-12 group-hover:scale-115" src="/public/image/paw.png" alt="paw">
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-30 p-2 shadow-sm mt-1">
+                <li><a>My profile</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="pt-24 flex p-5 gap-4">
+        <!-- มีงาน -->
+        <div class="flex flex-col w-70">
+            <div class="bg-[#fbe4c0] rounded-t-3xl p-2 flex justify-center">
+                <h1 class="text-[#dc7a5d] text-2xl font-bold pt-2 uppercase">monday</h1>
+            </div>
+            <div class="bg-white rounded-b-3xl py-6 px-5 flex flex-col gap-5 shadow-xs">
+                <div class="flex flex-col gap-2">
+                    <label class="group flex gap-3 items-start cursor-pointer">
+                        <input class="hidden" type="checkbox">
+
+                        <div
+                            class="w-7 h-7 border-2 border-[#9c7356] rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="/public/image/paw2.png" alt="paw-brown"
+                                class="w-10 hidden group-has-[:checked]:block">
+                        </div>
+
+                        <h1
+                            class="text-lg text-[#9c7356] group-has-[:checked]:line-through group-has-[:checked]:text-[#e0bba1] min-w-0 break-words">
+                            homework</h1>
+                    </label>
+                    <label class="group flex gap-3 items-start cursor-pointer">
+                        <input class="hidden" type="checkbox">
+
+                        <div
+                            class="w-7 h-7 border-2 border-[#9c7356] rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="/public/image/paw2.png" alt="paw-brown"
+                                class="w-10 hidden group-has-[:checked]:block">
+                        </div>
+
+                        <h1
+                            class="text-lg text-[#9c7356] group-has-[:checked]:line-through group-has-[:checked]:text-[#e0bba1] min-w-0 break-words">
+                            homework</h1>
+                    </label>
+                    <label class="group flex gap-3 items-start cursor-pointer">
+                        <input class="hidden" type="checkbox">
+
+                        <div
+                            class="w-7 h-7 border-2 border-[#9c7356] rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="/public/image/paw2.png" alt="paw-brown"
+                                class="w-10 hidden group-has-[:checked]:block">
+                        </div>
+
+                        <h1
+                            class="text-lg text-[#9c7356] group-has-[:checked]:line-through group-has-[:checked]:text-[#e0bba1] min-w-0 break-words">
+                            homework</h1>
+                    </label>
+                </div>
+
+                <div class="w-full flex justify-center">
+                    <button
+                        class="text-[#9c7356] bg-[#fbe4c0] p-1 px-5 rounded-2xl active:scale-95 shadow-xs hover:bg-[#f5ddb7]">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ไม่มีงาน -->
+        <div class="flex flex-col w-70">
+            <div class="bg-[#fbe4c0] rounded-t-3xl p-2 flex justify-center">
+                <h1 class="text-[#dc7a5d] text-2xl font-bold pt-2 uppercase">monday</h1>
+            </div>
+            <div class="bg-white rounded-b-3xl py-6 px-5 flex flex-col gap-5 shadow-xs">
+                <div class="flex flex-col gap-2  w-full items-center opacity-80">
+                    <img class="w-35" src="/public/image/cat-sleep.png" alt="cat-sleep">
+                    <h1 class="text-[#c1aea8] text-xs font-bold">NO PLAN.....</h1>
+                </div>
+                <div class="w-full flex justify-center">
+                    <button
+                        class="text-[#9c7356] bg-[#fbe4c0] p-1 px-5 rounded-2xl active:scale-95 shadow-xs hover:bg-[#f5ddb7]">ADD</button>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
