@@ -10,12 +10,14 @@
     <style>
     @font-face {
         font-family: 'Pixellari';
-        src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        /* แก้ path ฟอนต์ */
+        src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'SOV_BokThang';
-        src: url('/public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
+        /* แก้ path ฟอนต์ */
+        src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
         size-adjust: 125%;
     }
 
@@ -27,13 +29,16 @@
 
 </head>
 
-<body class="font-pixel flex min-h-screen justify-center bg-[url('/public/image/bg.png')]">
+<!-- แก้ path รูปพื้นหลัง -->
+<body class="font-pixel flex min-h-screen justify-center bg-[url('../public/image/bg.png')]">
     <div class="relative flex flex-col justify-center w-[380px]">
-        <img id="cat-img" src="/public/image/cat-login.png" class="absolute bottom-[400px] left-[120px] w-[300px] transition-all duration-500 z-1 pointer-events-none">
+        <!-- แก้ path รูปแมว -->
+        <img id="cat-img" src="../public/image/cat-login.png" class="absolute bottom-[400px] left-[120px] w-[300px] transition-all duration-500 z-1 pointer-events-none">
 
         <div class="flex flex-col z-2 bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-14 justify-center items-center gap-3">
-            <h1 class="text-[#ec6433] flex font-pixel text-3xl font-bold gap-2 mb-5"> Welcome <img
-                    src="/public/image/heart.png" class="w-[40px] animate-bounce" alt="heart">
+            <h1 class="text-[#ec6433] flex font-pixel text-3xl font-bold gap-2 mb-5"> Welcome 
+                <!-- แก้ path รูปหัวใจ -->
+                <img src="../public/image/heart.png" class="w-[40px] animate-bounce" alt="heart">
             </h1>
 
             <form id="login-form" class="flex flex-col gap-4 w-[250px]">
