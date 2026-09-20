@@ -8,41 +8,107 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <style>
-        @font-face {
-            font-family: 'Pixellari';
-            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
-        }
+    @font-face {
+        font-family: 'Pixellari';
+        src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+    }
 
-        .font-pixel {
-            font-family: 'Pixellari', sans-serif;
-        }
+    @font-face {
+        font-family: 'SOV_BokThang';
+        src: url('/public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
+        size-adjust: 125%;
+    }
+
+    .font-pixel {
+        font-family: 'Pixellari', 'SOV_BokThang', sans-serif !important;
+    }
+
     </style>
 
 </head>
 
-<body class="flex min-h-screen justify-center bg-[url('/public/image/bg.png')]">
-    <div class="relative group flex flex-col justify-center w-[380px]">
-        <img src="/public/image/cat-login.png" class="absolute bottom-[400px] left-[120px] w-[300px] transition-all duration-500 z-1 group-hover:bottom-[458px]">
+<body class="font-pixel flex min-h-screen justify-center bg-[url('/public/image/bg.png')]">
+    <div class="relative flex flex-col justify-center w-[380px]">
+        <img id="cat-img" src="/public/image/cat-login.png" class="absolute bottom-[400px] left-[120px] w-[300px] transition-all duration-500 z-1 pointer-events-none">
 
         <div class="flex flex-col z-2 bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-14 justify-center items-center gap-3">
-            <h1 class="text-[#ff4500] flex font-pixel text-3xl font-bold gap-2 mb-5"> Welcome <img
+            <h1 class="text-[#ec6433] flex font-pixel text-3xl font-bold gap-2 mb-5"> Welcome <img
                     src="/public/image/heart.png" class="w-[40px] animate-bounce" alt="heart">
             </h1>
 
-            <form class="flex flex-col gap-4 w-[250px]">
+            <form id="login-form" class="flex flex-col gap-4 w-[250px]">
 
-                <input class="input rounded-lg focus:border-none focus:outline-2 focus:outline-[#f4a285]" type="text" name="name"
-                    placeholder="Name" required>
+                <input id="email" class="login-input input rounded-lg focus:border-none focus:outline-2 focus:outline-[#f4a285] tracking-wider" type="email" name="email"
+                    placeholder="Email" required>
 
-                <input class="input rounded-lg focus:border-none focus:outline-2 focus:outline-[#f4a285]" type="password" name="password"
+                <input id="password" class="login-input input rounded-lg focus:border-none focus:outline-2 focus:outline-[#f4a285] tracking-wider" type="password" name="password"
                     placeholder="Password" required>
 
-                <button type="submit" name="login"
-                    class="btn bg-[#ff4500] rounded-lg text-white text-[15px] p-5 hover:bg-[#ea3f01]">Log in</button>
+                <p id="error-msg" class="text-xs text-red-500 font-bold hidden text-center leading-tight"></p>
+
+                <button type="submit" id="btn-login" name="login"
+                    class="btn bg-[#ec6433] rounded-lg text-white text-[15px] p-5 hover:bg-[#d55324]">Log in</button>
             </form>
         </div>
     </div>
 
+    <script type="module">
+        import { supabase } from './supabaseClient.js';
+
+        // 1. ควบคุมแมวเด้งเมื่อโฟกัสช่องกรอก
+        const catImg = document.getElementById('cat-img');
+        const inputs = document.querySelectorAll('.login-input');
+
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                catImg.style.bottom = '458px';
+            });
+            input.addEventListener('blur', () => {
+                catImg.style.bottom = '400px';
+            });
+        });
+
+        // 2. ล็อกอินด้วย Supabase
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('error-msg');
+        const btnLogin = document.getElementById('btn-login');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            showError('');
+            btnLogin.disabled = true;
+            btnLogin.textContent = 'Logging in...';
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                showError(error.message);
+                btnLogin.disabled = false;
+                btnLogin.textContent = 'Log in';
+            } else {
+                // ✅ ใช้ Relative Path เพื่อให้เปลี่ยนหน้าได้ถูกต้องทุกสภาพแวดล้อม
+                window.location.replace('./menu.html');
+            }
+        });
+
+        function showError(msg) {
+            if (msg) {
+                errorMsg.textContent = msg;
+                errorMsg.classList.remove('hidden');
+            } else {
+                errorMsg.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <!-- DaisyUI + Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -15,51 +17,92 @@
         }
 
         .font-pixel {
-            font-family: 'Pixellari', sans-serif;
+            font-family: 'Pixellari', sans-serif !important;
         }
     </style>
 </head>
 
 <body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel">
+
+    <!-- Navbar -->
     <nav
-        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full  shadow-md shadow-[#e5acb5]">
+        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div></div>
-        <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3 ">Make it happen today!</h1>
+        <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3">Make it happen today!</h1>
         <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
-                <img class="w-12 group-hover:scale-115" src="/public/image/paw.png" alt="paw">
+            <div tabindex="0" role="button"
+                class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
             </div>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-30 p-2 shadow-sm mt-1">
-                <li><a>My profile</a></li>
-                <li><a>Logout</a></li>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
+                <li><a href="./profile.html">My profile</a></li>
+                <li><a id="btn-logout-nav">Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="flex justify-center mt-20">
-        <div class="grid grid-cols-[repeat(auto-fit,160px)] p-20 px-30 w-full max-w-6xl gap-10 justify-center">
-            <div
-                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer gap-5 active:scale-95">
-                <img class="w-19 h-19" src="/public/image/cat1.png" alt="cat1">
-                <h1 class="text-xl uppercase text-[#ec6433] font-bold">planner</h1>
-            </div>
-            <div
-                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer gap-5 active:scale-95">
-                <img class="w-19 h-19" src="/public/image/cat2.png" alt="cat2">
-                <h1 class="text-xl uppercase text-[#ec6433] font-bold">bank</h1>
-            </div>
-            <div
-                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer active:scale-95">
-                <img class="w-30 h-19 object-contain" src="/public/image/flower.png" alt="flower">
-                <h1 class="text-xl uppercase text-[#ec6433] font-bold text-center">mood tracker</h1>
-            </div>
-            <div
-                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 items-center cursor-pointer active:scale-95">
+    <!-- Menu Grid -->
+    <div class="flex justify-center mt-28">
+        <div class="grid grid-cols-[repeat(auto-fit,160px)] p-10 md:p-20 px-10 w-full max-w-6xl gap-10 justify-center">
+
+            <!-- 1. DASHBOARD -->
+            <a href="dashboard.html"
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 active:scale-95 transition-transform cursor-pointer gap-3 text-center">
                 <img class="w-15 h-19 object-contain" src="/public/image/bow.png" alt="bow">
-                <h1 class="text-xl uppercase text-[#ec6433] font-bold text-center">Period Tracker</h1>
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold">dashboard</h1>
+            </a>
+
+            <!-- 2. PLANNER -->
+            <a href="planner.html"
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 active:scale-95 transition-transform cursor-pointer gap-5 text-center">
+                <img class="w-19 h-19 object-contain" src="/public/image/cat1.png" alt="cat1">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold">planner</h1>
+            </a>
+
+            <!-- 3. BANK -->
+            <a href="bank.html"
+                class="flex flex-col justify-center items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-2 px-6 hover:scale-105 w-35 active:scale-95 transition-transform cursor-pointer gap-5 text-center">
+                <img class="w-19 h-19 object-contain" src="/public/image/cat2.png" alt="cat2">
+                <h1 class="text-xl uppercase text-[#ec6433] font-bold">bank</h1>
+            </a>
+
+            <!-- 4. MOOD TRACKER (Disabled) -->
+            <div
+                class="relative flex flex-col justify-center items-center bg-gray-100 border-[3.75px] border-gray-300 rounded-3xl p-2 px-6 w-35 cursor-not-allowed select-none opacity-70 overflow-hidden">
+                <img class="w-28 h-19 object-contain grayscale opacity-50" src="/public/image/flower.png" alt="flower">
+                <h1 class="text-xl uppercase text-gray-400 font-bold text-center leading-tight">mood tracker</h1>
+
+                <!-- Badge Coming Soon -->
+                <span
+                    class="absolute top-2 right-2 bg-gray-400 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold tracking-tighter">SOON</span>
             </div>
 
         </div>
+    </div>
+
+    <script type="module">
+        import { supabase } from './supabaseClient.js';
+
+        // 1. ตรวจสอบ Session ตอนโหลดหน้าเว็บ (ถ้ายังไม่ล็อกอิน ให้เด้งกลับหน้า index.html ทันที)
+        async function checkUserSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.replace('./index.html');
+            }
+        }
+        checkUserSession();
+
+        // 2. โค้ดสำหรับจัดการปุ่ม Logout บน Navbar
+        document.getElementById('btn-logout-nav')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // สั่งออกจากระบบ
+            await supabase.auth.signOut();
+
+            // สั่งเด้งไปหน้า Login ทันที
+            window.location.replace('./index.html');
+        });
+    </script>
 
 </body>
 

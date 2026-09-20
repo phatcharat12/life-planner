@@ -1,0 +1,67 @@
+holidays:
+  # @source https://www.citizensinformation.ie/en/employment/employment-rights-and-conditions/leave-and-holidays/public-holidays/
+  # @source https://www.irishstatutebook.ie/eli/1997/act/20/enacted/en/html
+  # @attrib https://en.wikipedia.org/wiki/Public_holidays_in_the_Republic_of_Ireland
+  IE:
+    names:
+      en: Ireland
+    dayoff: sunday
+    zones:
+      - Europe/Dublin
+    langs:
+      - en
+    days:
+      01-01:
+        _name: 01-01
+      02-01 if Tuesday,Wednesday,Thursday,Saturday,Sunday then next Monday since 2023:
+        # Official Rule: First Monday in February, or 1 February if the date falls on a Friday
+        # @source https://www.irishstatutebook.ie/eli/2023/act/8/enacted/en/html
+        name:
+          en: St. Brigid’s Day
+      03-17:
+        name:
+          en: St. Patrick’s Day
+      03-17 and if saturday then next monday if sunday then next monday:
+        name:
+          en: St. Patrick’s Day
+        substitute: true
+        type: bank
+      easter -21:
+        _name: Mothers Day
+        type: observance
+      easter -2:
+        _name: easter -2
+        type: bank
+      easter:
+        _name: easter
+        type: observance
+      easter 1:
+        _name: easter 1
+      1st monday in May:
+        name:
+          en: First Monday in May
+      1st monday in June:
+        name:
+          en: First Monday in June
+      1st monday in August:
+        name:
+          en: First Monday in August
+      1st Monday before 11-01:
+        name:
+          en: Last Monday in October
+          type: bank
+      12-25:
+        _name: 12-25
+      12-26:
+        _name: 12-26
+        name:
+          en: St. Stephen’s Day
+      12-26 and if saturday then next monday if sunday then next monday:
+        _name: 12-26
+        name:
+          en: St. Stephen’s Day
+        substitute: true
+        type: bank
+      3rd sunday in June:
+        _name: Fathers Day
+        type: observance
