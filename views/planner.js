@@ -419,7 +419,7 @@ function startCatTailAnimation() {
     catAnimInterval = setInterval(() => {
         frameIndex = (frameIndex + 1) % CAT_FRAMES.length;
         catImg.src = CAT_FRAMES[frameIndex];
-    }, 300);
+    }, 500);
 }
 
 function stopCatTailAnimation() {
