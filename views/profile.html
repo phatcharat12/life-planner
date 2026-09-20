@@ -13,7 +13,8 @@
     <style>
         @font-face {
             font-family: 'Pixellari';
-            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+            /* แก้ path ฟอนต์ */
+            src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
         }
 
         .font-pixel {
@@ -22,14 +23,16 @@
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel text-[#5c3d2e]">
+<!-- แก้ path รูปพื้นหลัง -->
+<body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel text-[#5c3d2e]">
 
     <!-- Navbar -->
     <nav
         class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div>
-            <a href="menu.html">
-                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="/public/image/home.png"
+            <a href="./menu.html">
+                <!-- แก้ path รูป home -->
+                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="../public/image/home.png"
                     alt="home">
             </a>
         </div>
@@ -37,10 +40,11 @@
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
                 class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
-                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
+                <!-- แก้ path รูป paw -->
+                <img class="w-12 group-hover:scale-115 transition-transform" src="../public/image/paw.png" alt="paw">
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
-                <li><a href="profile.html">My profile</a></li>
+                <li><a href="./profile.html">My profile</a></li>
                 <li><a href="#" id="btn-logout">Logout</a></li>
             </ul>
         </div>
@@ -56,7 +60,8 @@
             <!-- รูปโปรไฟล์ทรงกลม -->
             <div
                 class="w-24 h-24 rounded-full border-4 border-[#ffced5] overflow-hidden bg-[#fef8f0] flex justify-center items-center">
-                <img src="/public/image/profile.png" alt="profile" class="w-full h-full object-cover">
+                <!-- แก้ path รูป profile -->
+                <img src="../public/image/profile.png" alt="profile" class="w-full h-full object-cover">
             </div>
 
             <!-- ข้อมูลชื่อ (มีกรอบไฮไลท์) และอีเมล (บรรทัดเดียวกัน) -->
@@ -69,7 +74,8 @@
                         <h2 id="text-display-name" class="text-2xl font-bold text-[#ec6433]">-</h2>
                         <button id="btn-open-edit-name"
                             class="hover:scale-110 active:scale-95 transition-transform cursor-pointer">
-                            <img class="h-6 object-contain" src="/public/image/update.png" alt="update">
+                            <!-- แก้ path รูป update -->
+                            <img class="h-6 object-contain" src="../public/image/update.png" alt="update">
                         </button>
                     </div>
                 </div>
@@ -165,7 +171,6 @@
         </form>
     </dialog>
 
-    <!-- สคริปต์ JavaScript -->
     <!-- สคริปต์ JavaScript สำหรับจัดการ Profile และเชื่อมตาราง weekly_budgets -->
     <script type="module">
         import { supabase } from './supabaseClient.js';
@@ -186,6 +191,7 @@
         async function getAuthenticatedUser() {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) {
+                // แก้เป็น relative path
                 window.location.replace('./index.html');
                 return null;
             }
@@ -325,6 +331,7 @@
         document.getElementById('btn-logout')?.addEventListener('click', async (e) => {
             e.preventDefault();
             await supabase.auth.signOut();
+            // แก้เป็น relative path
             window.location.replace('./index.html');
         });
 

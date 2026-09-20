@@ -11,12 +11,12 @@ const MONTH_NAMES = [
 ];
 
 const CAT_FRAMES = [
-    '/public/image/planner/cat-1.jpg',
-    '/public/image/planner/cat-2.png',
-    '/public/image/planner/cat-3.jpg',
-    '/public/image/planner/cat-4.jpg',
-    '/public/image/planner/cat-3.jpg',
-    '/public/image/planner/cat-2.png'
+    '../public/image/planner/cat-1.jpg',
+    '../public/image/planner/cat-2.png',
+    '../public/image/planner/cat-3.jpg',
+    '../public/image/planner/cat-4.jpg',
+    '../public/image/planner/cat-3.jpg',
+    '../public/image/planner/cat-2.png'
 ];
 
 // --- STATE MANAGEMENT ---
@@ -199,7 +199,7 @@ async function loadTodos() {
         if (listContainer && listContainer.children.length === 0) {
             listContainer.innerHTML = `
                 <div class="flex flex-col gap-2 w-full items-center opacity-80 h-full justify-center">
-                    <img class="w-35" src="/public/image/cat-sleep.png" alt="cat-sleep">
+                    <img class="w-35" src="../public/image/cat-sleep.png" alt="cat-sleep">
                     <h1 class="text-[#c1aea8] text-xs font-bold mt-2">NO PLAN.....</h1>
                 </div>
             `;
@@ -213,7 +213,7 @@ function createTodoElement(todo) {
     label.innerHTML = `
         <input class="hidden" type="checkbox" ${todo.is_completed ? 'checked' : ''}>
         <div class="w-7 h-7 border-2 border-[#9c7356] rounded-full flex items-center justify-center flex-shrink-0">
-            <img src="/public/image/paw2.png" alt="paw-brown" class="w-10 ${todo.is_completed ? '' : 'hidden'} group-has-[:checked]:block">
+            <img src="../public/image/paw2.png" alt="paw-brown" class="w-10 ${todo.is_completed ? '' : 'hidden'} group-has-[:checked]:block">
         </div>
         <h1 class="text-lg text-[#9c7356] ${todo.is_completed ? 'line-through text-[#e0bba1]' : ''} group-has-[:checked]:line-through group-has-[:checked]:text-[#e0bba1] min-w-0 break-words">
             ${todo.title}
@@ -329,7 +329,7 @@ function generateCalendarDaysHTML(targetDate, deadlineDates, isModal = false, se
         if (isToday) {
             daysHTML.push(`
                 <div class="${itemClass} relative flex items-center justify-center p-0.5 cursor-pointer ${weekBgClass}" data-day="${day}">
-                    <img src="/public/image/paw.png" class="absolute ${pawSize} object-contain z-0 animate-pulse pointer-events-none" alt="Today">
+                    <img src="../public/image/paw.png" class="absolute ${pawSize} object-contain z-0 animate-pulse pointer-events-none" alt="Today">
                     <span class="relative z-10 ${textColorClass} pointer-events-none">${day}</span>
                 </div>
             `);

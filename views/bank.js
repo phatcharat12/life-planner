@@ -292,7 +292,7 @@ function renderExpenses() {
             <div class="flex items-center gap-3">
                 <span class="text-[#dc7a5d] font-bold">${formatMoney(expense.amount)}.-</span>
                 <button type="button" class="btn-delete text-xs text-gray-400 hover:text-red-400">
-                    <img width="20" src="/public/image/bank/delete.png" alt="delete">
+                    <img width="20" src="../public/image/bank/delete.png" alt="delete">
                 </button>
             </div>
         `;
@@ -426,7 +426,7 @@ function renderSavings() {
 
     const image = document.getElementById('piggy-image');
     if (image) {
-        image.src = `/public/image/bank/pig-${level}.png`;
+        image.src = `../public/image/bank/pig-${level}.png`;
         image.className = 'w-full h-full object-contain scale-170 transition-transform duration-300';
     }
 }
