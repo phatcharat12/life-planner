@@ -1,0 +1,169 @@
+holidays:
+  # @source https://www.emploi.belgique.be/fr/themes/international/detachement/conditions-de-travail-respecter-en-cas-de-detachement-en-2
+  # @source https://www.werk.belgie.be/nl/themas/internationaal/detachering/na-te-leven-arbeidsvoorwaarden-geval-van-detachering-naar-3
+  # @attrib https://nl.wikipedia.org/wiki/Feestdagen_in_Belgi%C3%AB
+  # @attrib https://en.wikipedia.org/wiki/Public_holidays_in_Belgium
+  BE:
+    names:
+      fr: Belgique
+      nl: België
+      de: Belgien
+      en: Belgium
+    dayoff: sunday
+    zones:
+      - Europe/Brussels
+    langs:
+      - fr
+      - nl
+      - de
+    days:
+      01-01:
+        _name: 01-01
+      01-06:
+        _name: 01-06
+        name:
+          de: Erscheinung des Herrn
+        type: observance
+      02-14:
+        _name: 02-14
+        type: observance
+      easter:
+        _name: easter
+        type: observance
+      easter 1:
+        _name: easter 1
+        name:
+          nl: Paasmaandag
+      05-01:
+        _name: 05-01
+      2nd sunday in May:
+        _name: Mothers Day
+        type: observance
+      easter 39:
+        _name: easter 39
+        name:
+          nl: Hemelvaartsdag
+      easter 49:
+        _name: easter 49
+        type: observance
+      easter 50:
+        _name: easter 50
+        name:
+          nl: Pinkstermaandag
+      07-21:
+        _name: National Holiday
+      08-15:
+        _name: 08-15
+        name:
+          nl: Tenhemelopneming
+      11-01:
+        _name: 11-01
+      11-02:
+        _name: 11-02
+        type: observance
+      11-11:
+        name:
+          fr: Armistice
+          nl: Wapenstilstand
+          de: Waffenstillstand
+          en: Armistice Day
+      11-15:
+        name:
+          fr: Fête du Roi
+          nl: Koningsdag
+          de: Festtag des Königs
+          en: King's Feast
+        type: observance
+      12-06:
+        _name: 12-06
+        type: observance
+      12-25:
+        _name: 12-25
+    states:
+      BRU:
+        name: Bruxelles
+        langs:
+          - fr
+          - nl
+        days:
+          05-08:
+            name:
+              fr: Fête de l'Iris
+              nl: Feest van de Iris
+              de: Iris Festival
+              en: Iris Festival
+            type: observance
+      DE:
+        name: Deutschsprachige Gemeinschaft
+        langs:
+          - de
+        days:
+          11-15:
+            name:
+              fr: Jour de la Communauté Germanophone
+              nl: Feestdag van de Duitstalige Gemeenschap
+              de: Tag der Deutschsprachigen Gemeinschaft
+              en: Day of the German-speaking Community
+            type: observance
+      VLG:
+        name: Vlaamse Gemeenschap
+        langs:
+          - nl
+        days:
+          07-11:
+            name:
+              fr: Fête de la Communauté flamande
+              nl: Feestdag van de Vlaamse Gemeenschap
+              de: Feiertag der Flämischen Gemeinschaft
+              en: Day of the Flemish Community
+            type: observance
+          11-02:
+            _name: 11-02
+            type: observance
+            note: day-off for employees of the flemish government
+          11-15:
+            name:
+              fr: Fête du Roi
+              nl: Koningsdag
+              de: Festtag des Königs
+              en: King's Feast
+            type: observance
+            note: day-off for employees of the flemish government
+          12-26:
+            _name: 12-26
+            type: observance
+            note: day-off for employees of the flemish government
+        # regions:
+        # VAN:
+        #   name: Antwerp
+        # VBR:
+        #   name: Flemish Brabant
+        # VLI:
+        #   name: Limburg
+        # VOV:
+        #   name: East Flanders
+        # VWV:
+        #   name: West Flanders
+      WAL:
+        name: Communauté française
+        langs:
+          - fr
+        days:
+          09-27:
+            name:
+              fr: La fête de la communauté française
+              nl: Feestdag van de Franse Gemeenschap
+              de: Tag der Französischsprachigen Gemeinschaft
+              en: French Community Holiday
+            type: observance
+        # regions:
+        # WBR:
+        #   name: Walloon Brabant
+        # WHT:
+        #   name: Hainaut
+        # WLG:
+        #   name: Liège
+        # WLX:
+        #   name: Luxembourg
+        # WNA:
+        #   name: Namur

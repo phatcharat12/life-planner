@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Pixellari';
+            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'SOV_BokThang';
+            src: url('/public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
+            size-adjust: 125%;
+        }
+
+        .font-pixel {
+            font-family: 'Pixellari', 'SOV_BokThang', sans-serif !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e88d67;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #d67b55;
+        }
+
+        /* Animation แมวเดินลอยๆ ตามระยะที่กำหนด */
+        @keyframes floatWalkCat {
+            0% {
+                transform: translateX(10px) scaleX(-1);
+            }
+
+            50% {
+                transform: translateX(450px) scaleX(-1);
+            }
+
+            51% {
+                transform: translateX(450px) scaleX(1);
+            }
+
+            100% {
+                transform: translateX(10px) scaleX(1);
+            }
+        }
+
+        .animate-cat-floating {
+            animation: floatWalkCat 40s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel text-[#5c3d2e] pb-10">
+
+    <nav
+        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
+        <div>
+            <a href="menu.html">
+                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="/public/image/home.png"
+                    alt="home">
+            </a>
+        </div>
+
+        <div class="dropdown dropdown-center">
+            <div tabindex="0" role="button" class="flex items-center gap-3 cursor-pointer active:scale-95">
+                <h1 id="current-week-label"
+                    class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3">
+                    WEEK 1/52
+                </h1>
+                <div>
+                    <img class="w-5" src="/public/image/triangle.png" alt="triangle">
+                </div>
+            </div>
+
+            <ul tabindex="0" id="week-dropdown-list"
+                class="dropdown-content menu bg-base-100 rounded-box z-50 w-48 p-2 shadow-lg mt-1 max-h-80 overflow-y-auto custom-scrollbar">
+            </ul>
+        </div>
+
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button"
+                class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
+                <li><a href="./profile.html">My profile</a></li>
+                <li><a id="btn-logout-nav">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="pt-28 px-6 max-w-7xl mx-auto w-full flex flex-col gap-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
+                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
+                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Remaining Budget</span>
+                    <p id="dash-remaining" class="text-3xl font-black text-[#e88d67] mt-2">0 .-</p>
+                    <div class="text-xs text-gray-400 mt-1">Weekly Limit: <span id="dash-budget" class="font-bold text-[#5c3d2e]">0 .-</span></div>
+                </div>
+            </div>
+
+            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
+                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
+                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Spent This Week</span>
+                    <p id="dash-spent" class="text-3xl font-black text-[#dc7a5d] mt-2">0 .-</p>
+                    <span class="text-xs text-gray-400 mt-1">Expenses + Installments</span>
+                </div>
+            </div>
+
+            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
+                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
+                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Piggy Savings</span>
+                    <p id="dash-savings" class="text-3xl font-black text-[#6b9080] mt-2">0 .-</p>
+                    <span class="text-xs font-bold text-[#6b9080] mt-1 flex items-center gap-1.5">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#ffb6c1]"></span> Total Saved In Bank
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
+                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Planner Tasks</span>
+                        <span id="dash-task-percent" class="font-black text-xs text-[#9c7356]">0%</span>
+                    </div>
+                    <div class="w-full bg-[#fbe4c0] h-3.5 rounded-full overflow-hidden mt-2 p-0.5 border border-[#f0d8c2]">
+                        <div id="dash-task-progress" class="bg-[#e88d67] h-full rounded-full transition-all duration-300 w-0"></div>
+                    </div>
+                    <span id="dash-task-count" class="text-xs font-bold text-gray-400 mt-1 text-right">0/0 Completed</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div class="lg:col-span-2 bg-[#9c7356] rounded-3xl p-2 shadow-xl flex flex-col justify-between relative">
+                <div class="text-center font-bold text-white text-lg tracking-wider my-1 uppercase">
+                    DAILY EXPENSE TREND
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 flex-1 flex flex-col justify-between relative overflow-hidden">
+                    <div class="h-64 relative w-full">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+
+                    <div class="absolute bottom-1 left-2 pointer-events-none z-10">
+                        <div class="animate-cat-floating w-18 h-18">
+                            <div class="tenor-gif-embed" data-postid="14565873" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="flex flex-col gap-6">
+
+                <!-- UPCOMING DEADLINES (ขวาบน: สี Terracotta Rose #d98282) -->
+                <div class="bg-[#ce93a6] rounded-3xl p-2 shadow-xl flex flex-col">
+                    <div class="flex items-center justify-center gap-2 font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
+                        <img src="/public/image/alert.png" class="w-6 h-6 object-contain brightness-200" alt="alert">
+                        <span>UPCOMING DEADLINES</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
+                        <div id="dash-deadline-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIVE INSTALLMENTS (ขวาล่าง: สี Slate Sage #83a3a3) -->
+                <div class="bg-[#b5c99a] rounded-3xl p-2 shadow-xl flex flex-col">
+                    <div class="text-center font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
+                        ACTIVE INSTALLMENTS
+                    </div>
+                    <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
+                        <div id="dash-installment-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <script type="module" src="./dashboard.js"></script>
+</body>
+
+</html>

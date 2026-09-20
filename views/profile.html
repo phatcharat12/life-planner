@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <!-- DaisyUI + Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Pixellari';
+            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        }
+
+        .font-pixel {
+            font-family: 'Pixellari', sans-serif !important;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel text-[#5c3d2e]">
+
+    <!-- Navbar -->
+    <nav
+        class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
+        <div>
+            <a href="menu.html">
+                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="/public/image/home.png"
+                    alt="home">
+            </a>
+        </div>
+        <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3">MY PROFILE</h1>
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button"
+                class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
+                <li><a href="profile.html">My profile</a></li>
+                <li><a href="#" id="btn-logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="flex flex-col items-center gap-6 mt-28 mb-10 px-4">
+
+        <!-- 👤 1. ส่วนข้อมูลโปรไฟล์ -->
+        <div
+            class="flex flex-col items-center bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-6 w-full max-w-md shadow-lg gap-4 text-center">
+
+            <!-- รูปโปรไฟล์ทรงกลม -->
+            <div
+                class="w-24 h-24 rounded-full border-4 border-[#ffced5] overflow-hidden bg-[#fef8f0] flex justify-center items-center">
+                <img src="/public/image/profile.png" alt="profile" class="w-full h-full object-cover">
+            </div>
+
+            <!-- ข้อมูลชื่อ (มีกรอบไฮไลท์) และอีเมล (บรรทัดเดียวกัน) -->
+            <div class="w-full space-y-3">
+                <!-- ชื่อ + กรอบไฮไลท์ + ปุ่ม update -->
+                <div>
+                    <span class="text-xs text-[#9c7356] font-bold uppercase block mb-1">Display Name</span>
+                    <div
+                        class="inline-flex items-center gap-3 bg-[#fff5f0] border-2 border-[#fbe4c0] px-5 py-2 rounded-2xl shadow-xs">
+                        <h2 id="text-display-name" class="text-2xl font-bold text-[#ec6433]">-</h2>
+                        <button id="btn-open-edit-name"
+                            class="hover:scale-110 active:scale-95 transition-transform cursor-pointer">
+                            <img class="h-6 object-contain" src="/public/image/update.png" alt="update">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- อีเมลแบบบรรทัดเดียวกัน -->
+                <div class="flex items-center justify-center gap-2 pt-1">
+                    <span class="text-xs text-[#9c7356] font-bold uppercase">Email :</span>
+                    <p id="text-user-email" class="text-sm font-bold text-[#5c3d2e] opacity-90">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ⚙️ 2. ส่วนตั้งค่าการเงิน -->
+        <div class="bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-6 w-full max-w-md shadow-lg space-y-4">
+            <h3 class="text-xl font-bold uppercase text-[#ec6433] border-b-2 border-[#fbe4c0] pb-2 text-center">SETTINGS
+            </h3>
+
+            <!-- แสดงค่าปัจจุบัน -->
+            <div id="settings-view-mode" class="space-y-3 text-center">
+                <div>
+                    <span class="text-xs font-bold text-[#9c7356] block uppercase">Weekly Budget</span>
+                    <p id="view-weekly-budget" class="text-xl font-bold text-[#dc7a5d]">700 .-</p>
+                </div>
+
+                <div>
+                    <span class="text-xs font-bold text-[#9c7356] block uppercase">Week Start Day</span>
+                    <p id="view-budget-start-day" class="text-base font-bold text-[#5c3d2e]">Monday</p>
+                </div>
+
+                <div class="pt-2">
+                    <button id="btn-enable-edit-settings" disabled
+                        class="bg-gray-200 text-gray-400 font-bold py-2 px-6 rounded-2xl shadow-xs cursor-not-allowed select-none opacity-70 text-sm uppercase">
+                        EDIT SETTINGS
+                    </button>
+                </div>
+            </div>
+
+            <!-- ฟอร์มแก้ไข -->
+            <form id="settings-edit-form" class="hidden space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-[#9c7356] block mb-1">WEEKLY BUDGET (THB)</label>
+                    <input type="number" id="weekly-budget" min="0" step="0.01" placeholder="e.g. 700"
+                        class="w-full px-4 py-2 rounded-2xl border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d] text-center">
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-[#9c7356] block mb-1">WEEK START DAY</label>
+                    <select id="budget-start-day"
+                        class="w-full px-4 py-2 rounded-2xl border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d] text-center bg-white">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-center gap-2 pt-2">
+                    <button type="button" id="btn-cancel-settings"
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-6 rounded-2xl active:scale-95 text-xs cursor-pointer">
+                        CANCEL
+                    </button>
+                    <button type="submit"
+                        class="bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-2 px-6 rounded-2xl active:scale-95 shadow-xs cursor-pointer text-xs">
+                        SAVE SETTINGS
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Modal แก้ไขชื่อ -->
+    <dialog id="edit_name_modal" class="modal">
+        <div
+            class="modal-box bg-white rounded-3xl p-6 max-w-sm flex flex-col items-center gap-4 text-[#5c3d2e] border-2 border-[#f4a285]">
+            <h3 class="font-bold text-xl uppercase tracking-wider text-[#dc7a5d]">EDIT DISPLAY NAME</h3>
+
+            <input id="input-new-name" type="text" placeholder="Enter new name..."
+                class="w-full px-4 py-2 text-center rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d]">
+
+            <div class="flex gap-2 w-full justify-center mt-2">
+                <button id="btn-save-name" type="button"
+                    class="bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-1.5 px-8 rounded-2xl active:scale-95 shadow-xs cursor-pointer">
+                    SAVE
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/30">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <!-- สคริปต์ JavaScript -->
+    <!-- สคริปต์ JavaScript สำหรับจัดการ Profile และเชื่อมตาราง weekly_budgets -->
+    <script type="module">
+        import { supabase } from './supabaseClient.js';
+
+        const DEFAULT_WEEKLY_BUDGET = 700;
+        let currentYear = new Date().getFullYear();
+        let currentWeekNumber = 1;
+
+        // คำนวณหาหมายเลขสัปดาห์ปัจจุบัน (ให้ตรงกับระบบของ bank.js)
+        function getCurrentWeekNumber() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const days = Math.floor((now - startOfYear) / (24 * 60 * 60 * 1000));
+            const week = Math.ceil((days + startOfYear.getDay() + 1) / 7);
+            return week > 52 ? 52 : week;
+        }
+
+        async function getAuthenticatedUser() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                window.location.replace('./index.html');
+                return null;
+            }
+            return user;
+        }
+
+        async function loadUserData() {
+            const user = await getAuthenticatedUser();
+            if (!user) return;
+
+            // 1. แสดงอีเมล
+            document.getElementById('text-user-email').textContent = user.email || '-';
+
+            // 2. แสดง Display Name
+            const displayName = user.user_metadata?.display_name || user.email.split('@')[0];
+            document.getElementById('text-display-name').textContent = displayName;
+            document.getElementById('input-new-name').value = displayName;
+
+            // 3. กำหนดสัปดาห์และปีปัจจุบัน
+            currentYear = new Date().getFullYear();
+            currentWeekNumber = getCurrentWeekNumber();
+
+            // ดึงข้อมูลงบประมาณจากตาราง weekly_budgets ของสัปดาห์นี้
+            const { data: budgetData, error } = await supabase
+                .from('weekly_budgets')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('week_number', currentWeekNumber)
+                .eq('year', currentYear)
+                .maybeSingle();
+
+            let weeklyBudget = DEFAULT_WEEKLY_BUDGET;
+            let budgetStartDay = user.user_metadata?.budget_start_day || 'Monday';
+
+            if (budgetData) {
+                weeklyBudget = budgetData.budget_amount;
+            } else {
+                // ถ้ายังไม่มีข้อมูลของสัปดาห์นี้ ให้สร้างค่าเริ่มต้นใส่ตารางรอไว้เลย
+                await supabase.from('weekly_budgets').insert({
+                    user_id: user.id,
+                    week_number: currentWeekNumber,
+                    year: currentYear,
+                    budget_amount: DEFAULT_WEEKLY_BUDGET,
+                    is_collected: false
+                });
+            }
+
+            // อัปเดตการแสดงผลหน้าเว็บ (View Mode)
+            document.getElementById('view-weekly-budget').textContent = `${Number(weeklyBudget).toLocaleString()} .-`;
+            document.getElementById('view-budget-start-day').textContent = budgetStartDay;
+
+            // อัปเดตในช่องฟอร์ม (Edit Mode)
+            document.getElementById('weekly-budget').value = weeklyBudget;
+            document.getElementById('budget-start-day').value = budgetStartDay;
+        }
+
+        // เปิด Modal แก้ไขชื่อ
+        document.getElementById('btn-open-edit-name')?.addEventListener('click', () => {
+            document.getElementById('edit_name_modal').showModal();
+        });
+
+        // บันทึกชื่อใหม่
+        document.getElementById('btn-save-name')?.addEventListener('click', async () => {
+            const newName = document.getElementById('input-new-name').value.trim();
+            if (!newName) return;
+
+            const { data, error } = await supabase.auth.updateUser({
+                data: { display_name: newName }
+            });
+
+            if (error) {
+                Swal.fire({ icon: 'error', title: 'Error', text: error.message, confirmButtonColor: '#dc7a5d' });
+            } else {
+                document.getElementById('text-display-name').textContent = newName;
+                document.getElementById('edit_name_modal').close();
+                Swal.fire({ icon: 'success', title: 'Updated!', timer: 1200, showConfirmButton: false });
+            }
+        });
+
+        // เปิดโหมดแก้ไขตั้งค่า
+        document.getElementById('btn-enable-edit-settings')?.addEventListener('click', () => {
+            document.getElementById('settings-view-mode').classList.add('hidden');
+            document.getElementById('settings-edit-form').classList.remove('hidden');
+        });
+
+        // ยกเลิกการแก้ไขตั้งค่า
+        document.getElementById('btn-cancel-settings')?.addEventListener('click', () => {
+            document.getElementById('settings-edit-form').classList.add('hidden');
+            document.getElementById('settings-view-mode').classList.remove('hidden');
+        });
+
+        // บันทึกตั้งค่า (อัปเดตลงตาราง weekly_budgets โดยตรง)
+        document.getElementById('settings-edit-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = await getAuthenticatedUser();
+            if (!user) return;
+
+            const budget = Number(document.getElementById('weekly-budget').value);
+            const startDay = document.getElementById('budget-start-day').value;
+
+            // อัปเดตงบลงตาราง weekly_budgets ของสัปดาห์นี้
+            const { error: updateError } = await supabase
+                .from('weekly_budgets')
+                .update({ budget_amount: budget })
+                .eq('user_id', user.id)
+                .eq('week_number', currentWeekNumber)
+                .eq('year', currentYear);
+
+            if (updateError) {
+                // ถ้าอัปเดตไม่ผ่าน (เช่นยังไม่มีแถวข้อมูล) ให้ใช้วิธี insert แทน
+                await supabase.from('weekly_budgets').insert({
+                    user_id: user.id,
+                    week_number: currentWeekNumber,
+                    year: currentYear,
+                    budget_amount: budget,
+                    is_collected: false
+                });
+            }
+
+            // บันทึกวันเริ่มต้นสัปดาห์เก็บไว้ใน user_metadata
+            await supabase.auth.updateUser({
+                data: { budget_start_day: startDay }
+            });
+
+            // อัปเดตหน้าจอแสดงผล
+            document.getElementById('view-weekly-budget').textContent = `${budget.toLocaleString()} .-`;
+            document.getElementById('view-budget-start-day').textContent = startDay;
+
+            // ปิดฟอร์มแก้ไข เปิดโหมดแสดงผลปกติ
+            document.getElementById('settings-edit-form').classList.add('hidden');
+            document.getElementById('settings-view-mode').classList.remove('hidden');
+
+            Swal.fire({ icon: 'success', title: 'Saved!', timer: 1200, showConfirmButton: false });
+        });
+
+        // Logout
+        document.getElementById('btn-logout')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await supabase.auth.signOut();
+            window.location.replace('./index.html');
+        });
+
+        // โหลดข้อมูลเมื่อเปิดหน้าเว็บ
+        loadUserData();
+    </script>
+</body>
+
+</html>
