@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -10,13 +11,11 @@
     <style>
     @font-face {
         font-family: 'Pixellari';
-        /* แก้ path ฟอนต์ */
         src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'SOV_BokThang';
-        /* แก้ path ฟอนต์ */
         src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
         size-adjust: 125%;
     }
@@ -24,24 +23,29 @@
     .font-pixel {
         font-family: 'Pixellari', 'SOV_BokThang', sans-serif !important;
     }
-
     </style>
 
 </head>
 
-<!-- แก้ path รูปพื้นหลัง -->
-<body class="font-pixel flex min-h-screen justify-center bg-[url('../public/image/bg.png')]">
-    <div class="relative flex flex-col justify-center w-[380px]">
-        <!-- แก้ path รูปแมว -->
-        <img id="cat-img" src="../public/image/cat-login.png" class="absolute bottom-[400px] left-[120px] w-[300px] transition-all duration-500 z-1 pointer-events-none">
+<body class="font-pixel flex min-h-screen justify-center items-center bg-[url('../public/image/bg.png')] bg-cover bg-center p-4">
+    
+    <!-- โครงสร้างหลัก จัดกึ่งกลางหน้าจอ -->
+    <div class="flex flex-col items-center w-full max-w-[380px]">
 
-        <div class="flex flex-col z-2 bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-14 justify-center items-center gap-3">
+        <!-- 1. ส่วนแมว: อยู่ด้านบนของกล่องการ์ด ปรับขยับขึ้นลงได้อิสระ -->
+        <div class="w-full flex justify-center -mb-28 z-0">
+            <img id="cat-img" src="../public/image/cat-login.png" 
+                 class="w-[280px] transition-transform duration-300 pointer-events-none -translate-y-3">
+        </div>
+
+        <!-- 2. ส่วนกล่องการ์ดสีขาว: ซ้อนทับส่วนล่างของแมวพอดี -->
+        <div class="relative z-10 bg-white border-[3.75px] border-[#f4a285] rounded-3xl p-8 sm:p-14 flex flex-col justify-center items-center gap-3 w-full shadow-lg">
+
             <h1 class="text-[#ec6433] flex font-pixel text-3xl font-bold gap-2 mb-5"> Welcome 
-                <!-- แก้ path รูปหัวใจ -->
                 <img src="../public/image/heart.png" class="w-[40px] animate-bounce" alt="heart">
             </h1>
 
-            <form id="login-form" class="flex flex-col gap-4 w-[250px]">
+            <form id="login-form" class="flex flex-col gap-4 w-full max-w-[250px]">
 
                 <input id="email" class="login-input input rounded-lg focus:border-none focus:outline-2 focus:outline-[#f4a285] tracking-wider" type="email" name="email"
                     placeholder="Email" required>
@@ -60,16 +64,16 @@
     <script type="module">
         import { supabase } from './supabaseClient.js';
 
-        // 1. ควบคุมแมวเด้งเมื่อโฟกัสช่องกรอก
+        // 1. ควบคุมแมวเด้งขึ้นด้วย translateY
         const catImg = document.getElementById('cat-img');
         const inputs = document.querySelectorAll('.login-input');
 
         inputs.forEach(input => {
             input.addEventListener('focus', () => {
-                catImg.style.bottom = '458px';
+                catImg.style.transform = 'translateY(-25px)'; // เด้งแมวขึ้นเมื่อโฟกัส
             });
             input.addEventListener('blur', () => {
-                catImg.style.bottom = '400px';
+                catImg.style.transform = 'translateY(0px)'; // ดึงแมวกลับตำแหน่งเดิม
             });
         });
 
@@ -100,7 +104,6 @@
                 btnLogin.disabled = false;
                 btnLogin.textContent = 'Log in';
             } else {
-                // ✅ ใช้ Relative Path เพื่อให้เปลี่ยนหน้าได้ถูกต้องทุกสภาพแวดล้อม
                 window.location.replace('./menu.html');
             }
         });

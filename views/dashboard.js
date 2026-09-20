@@ -24,7 +24,6 @@ async function init() {
     if (!user) return;
     currentUserId = user.id;
 
-    renderWeekDropdown();
     await loadDashboardData(selectedWeek);
 }
 
@@ -35,21 +34,6 @@ async function getAuthenticatedUser() {
         return null;
     }
     return user;
-}
-
-/* =========================================================
-   NAVBAR & WEEK DROPDOWN
-========================================================= */
-function renderWeekDropdown() {
-    setupWeekDropdown({
-        currentWeek: selectedWeek,
-        realWeek: currentRealWeek,
-        onSelectWeek: (w) => {
-            selectedWeek = w;
-            renderWeekDropdown();
-            loadDashboardData(selectedWeek);
-        }
-    });
 }
 
 /* =========================================================

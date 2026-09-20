@@ -13,13 +13,11 @@
     <style>
         @font-face {
             font-family: 'Pixellari';
-            /* แก้ไข Path ฟอนต์ */
             src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
         }
 
         @font-face {
             font-family: 'SOV_BokThang';
-            /* แก้ไข Path ฟอนต์ */
             src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
             size-adjust: 125%;
         }
@@ -68,7 +66,6 @@
     </style>
 </head>
 
-<!-- แก้ไข Path รูปพื้นหลัง -->
 <body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel text-[#5c3d2e]">
 
     <!-- Navbar -->
@@ -76,7 +73,6 @@
         class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div>
             <a href="./menu.html">
-                <!-- แก้ไข Path รูป home -->
                 <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="../public/image/home.png"
                     alt="home">
             </a>
@@ -89,7 +85,6 @@
                     WEEK 1/52
                 </h1>
                 <div>
-                    <!-- แก้ไข Path รูป triangle -->
                     <img class="w-5" src="../public/image/triangle.png" alt="triangle">
                 </div>
             </div>
@@ -102,12 +97,11 @@
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
                 class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
-                <!-- แก้ไข Path รูป paw -->
                 <img class="w-12 group-hover:scale-115 transition-transform" src="../public/image/paw.png" alt="paw">
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
                 <li><a href="./profile.html">My profile</a></li>
-                <li><a id="btn-logout-nav" class="cursor-pointer">Logout</a></li>
+                <li><a id="btn-logout-nav">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -127,7 +121,6 @@
             </div>
 
             <div class="relative w-52 h-52 flex justify-center items-center group">
-                <!-- แก้ไข Path รูป piggy bank -->
                 <img id="piggy-image" src="../public/image/bank/pig-0.jpg" alt="piggy bank"
                     class="w-full h-full object-contain transition-transform group-hover:scale-105">
                 <div id="coin-anim" class="hidden absolute top-0 text-3xl">🪙</div>
@@ -168,7 +161,6 @@
             <div class="p-4 border-t border-[#fbe4c0] flex justify-between items-center bg-[#fef8f0]">
                 <button id="btn-add-expense"
                     class="flex items-center gap-2 bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-2 px-6 rounded-2xl active:scale-95 shadow-xs cursor-pointer">
-                    <!-- แก้ไข Path รูป add -->
                     <img width="35" src="../public/image/bank/add.png" alt="add">
                     <span>ADD EXPENSE</span>
                 </button>
@@ -277,7 +269,7 @@
         </form>
     </dialog>
 
-    <!-- แก้ไข Path สคริปต์หลักของ Bank -->
+    <!-- Script หลักของ Bank -->
     <script type="module" src="./bank.js"></script>
 </body>
 

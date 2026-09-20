@@ -80,22 +80,7 @@
                     alt="home">
             </a>
         </div>
-
-        <div class="dropdown dropdown-center">
-            <div tabindex="0" role="button" class="flex items-center gap-3 cursor-pointer active:scale-95">
-                <h1 id="current-week-label"
-                    class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3">
-                    WEEK 1/52
-                </h1>
-                <div>
-                    <img class="w-5" src="../public/image/triangle.png" alt="triangle">
-                </div>
-            </div>
-
-            <ul tabindex="0" id="week-dropdown-list"
-                class="dropdown-content menu bg-base-100 rounded-box z-50 w-48 p-2 shadow-lg mt-1 max-h-80 overflow-y-auto custom-scrollbar">
-            </ul>
-        </div>
+        <h1 class="text-white text-2xl font-bold tracking-wider uppercase drop-shadow mt-3">Make it happen today!</h1>
 
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
@@ -117,7 +102,8 @@
                 <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
                     <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Remaining Budget</span>
                     <p id="dash-remaining" class="text-3xl font-black text-[#e88d67] mt-2">0 .-</p>
-                    <div class="text-xs text-gray-400 mt-1">Weekly Limit: <span id="dash-budget" class="font-bold text-[#5c3d2e]">0 .-</span></div>
+                    <div class="text-xs text-gray-400 mt-1">Weekly Limit: <span id="dash-budget"
+                            class="font-bold text-[#5c3d2e]">0 .-</span></div>
                 </div>
             </div>
 
@@ -145,10 +131,13 @@
                         <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Planner Tasks</span>
                         <span id="dash-task-percent" class="font-black text-xs text-[#9c7356]">0%</span>
                     </div>
-                    <div class="w-full bg-[#fbe4c0] h-3.5 rounded-full overflow-hidden mt-2 p-0.5 border border-[#f0d8c2]">
-                        <div id="dash-task-progress" class="bg-[#e88d67] h-full rounded-full transition-all duration-300 w-0"></div>
+                    <div
+                        class="w-full bg-[#fbe4c0] h-3.5 rounded-full overflow-hidden mt-2 p-0.5 border border-[#f0d8c2]">
+                        <div id="dash-task-progress"
+                            class="bg-[#e88d67] h-full rounded-full transition-all duration-300 w-0"></div>
                     </div>
-                    <span id="dash-task-count" class="text-xs font-bold text-gray-400 mt-1 text-right">0/0 Completed</span>
+                    <span id="dash-task-count" class="text-xs font-bold text-gray-400 mt-1 text-right">0/0
+                        Completed</span>
                 </div>
             </div>
 
@@ -168,7 +157,8 @@
 
                     <div class="absolute bottom-1 left-2 pointer-events-none z-10">
                         <div class="animate-cat-floating w-18 h-18">
-                            <div class="tenor-gif-embed" data-postid="14565873" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
+                            <div class="tenor-gif-embed" data-postid="14565873" data-share-method="host"
+                                data-aspect-ratio="1" data-width="100%"></div>
                         </div>
                     </div>
                 </div>
@@ -177,12 +167,14 @@
             <div class="flex flex-col gap-6">
 
                 <div class="bg-[#ce93a6] rounded-3xl p-2 shadow-xl flex flex-col">
-                    <div class="flex items-center justify-center gap-2 font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
+                    <div
+                        class="flex items-center justify-center gap-2 font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
                         <img src="../public/image/alert.png" class="w-6 h-6 object-contain brightness-200" alt="alert">
                         <span>UPCOMING DEADLINES</span>
                     </div>
                     <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
-                        <div id="dash-deadline-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
+                        <div id="dash-deadline-list"
+                            class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
                         </div>
                     </div>
                 </div>
@@ -192,7 +184,8 @@
                         ACTIVE INSTALLMENTS
                     </div>
                     <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
-                        <div id="dash-installment-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
+                        <div id="dash-installment-list"
+                            class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
                         </div>
                     </div>
                 </div>
