@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Planner</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,12 +12,14 @@
     <style>
     @font-face {
         font-family: 'Pixellari';
-        src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+        /* แก้ path ฟอนต์ Pixellari */
+        src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'SOV_BokThang';
-        src: url('/public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
+        /* แก้ path ฟอนต์ SOV_BokThang */
+        src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
         size-adjust: 125%;
     }
 
@@ -45,13 +47,15 @@
 
 </head>
 
-<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel">
+<!-- แก้ path รูปพื้นหลัง -->
+<body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel">
     <!-- Navbar -->
     <nav
         class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div>
-            <a href="menu.html">
-                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="/public/image/home.png"
+            <a href="./menu.html">
+                <!-- แก้ path รูป home -->
+                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="../public/image/home.png"
                     alt="home">
             </a>
         </div>
@@ -63,7 +67,8 @@
                     WEEK 1/52
                 </h1>
                 <div>
-                    <img class="w-5" src="/public/image/triangle.png" alt="triangle">
+                    <!-- แก้ path รูป triangle -->
+                    <img class="w-5" src="../public/image/triangle.png" alt="triangle">
                 </div>
             </div>
 
@@ -75,11 +80,12 @@
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
                 class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
-                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
+                <!-- แก้ path รูป paw -->
+                <img class="w-12 group-hover:scale-115 transition-transform" src="../public/image/paw.png" alt="paw">
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
                 <li><a href="./profile.html">My profile</a></li>
-                <li><a id="btn-logout-nav">Logout</a></li>
+                <li><a id="btn-logout-nav" class="cursor-pointer">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -89,18 +95,20 @@
 
         <!-- 1. กล่องปฏิทิน -->
         <div class="relative w-full pt-2 pb-1.5 px-1.5 bg-[#9c7356] rounded-3xl shadow-xl text-white flex flex-col h-fit mt-8">
-            <img src="/public/image/planner/cats_top.png" class="absolute -top-10 left-1/2 -translate-x-1/2 w-48 z-10" alt="Cats Top">
+            <!-- แก้ path รูป cats_top -->
+            <img src="../public/image/planner/cats_top.png" class="absolute -top-10 left-1/2 -translate-x-1/2 w-48 z-10" alt="Cats Top">
             <div id="month-title" class="text-center font-bold text-lg tracking-wider my-1"></div>
 
             <div class="bg-white rounded-b-2xl p-2 text-[#5c3d2e] font-bold">
                 <div class="w-full mb-1">
-                    <img src="/public/image/planner/cat_day.png" class="w-full h-auto object-contain" alt="Cat Days Header">
+                    <!-- แก้ path รูป cat_day -->
+                    <img src="../public/image/planner/cat_day.png" class="w-full h-auto object-contain" alt="Cat Days Header">
                 </div>
                 <div id="calendar-days" class="grid grid-cols-7 gap-y-1 text-center text-xs"></div>
             </div>
         </div>
 
-        <!-- 2. กล่อง To-Do (จำกัดความสูงสูงสุด และให้ Scroll ในการ์ดได้เมื่อรายการเยอะ) -->
+        <!-- 2. กล่อง To-Do -->
         <div id="todo-container" class="contents max-h-[70vh] overflow-y-auto custom-scrollbar"></div>
 
     </div>
@@ -136,7 +144,8 @@
                 </div>
                 <div class="bg-white rounded-xl p-2 text-[#5c3d2e]">
                     <div class="w-full mb-1">
-                        <img src="/public/image/planner/cat_day.png" class="w-full h-auto object-contain" alt="Cat Days">
+                        <!-- แก้ path รูป cat_day -->
+                        <img src="../public/image/planner/cat_day.png" class="w-full h-auto object-contain" alt="Cat Days">
                     </div>
                     <div id="modal-calendar-days" class="grid grid-cols-7 gap-y-1 text-center text-xs font-bold"></div>
                 </div>
@@ -175,7 +184,8 @@
         </form>
     </dialog>
 
-    <script type="module" src="/views/planner.js"></script>
+    <!-- แก้ path ของสคริปต์ JS เป็น Relative Path -->
+    <script type="module" src="./planner.js"></script>
 </body>
 
 </html>

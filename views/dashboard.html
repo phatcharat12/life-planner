@@ -13,12 +13,14 @@
     <style>
         @font-face {
             font-family: 'Pixellari';
-            src: url('/public/font/pixellari/Pixellari.ttf') format('truetype');
+            /* แก้ path ฟอนต์ Pixellari */
+            src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
         }
 
         @font-face {
             font-family: 'SOV_BokThang';
-            src: url('/public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
+            /* แก้ path ฟอนต์ SOV_BokThang */
+            src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
             size-adjust: 125%;
         }
 
@@ -68,13 +70,13 @@
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen bg-[url('/public/image/bg2.png')] font-pixel text-[#5c3d2e] pb-10">
+<body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel text-[#5c3d2e] pb-10">
 
     <nav
         class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div>
-            <a href="menu.html">
-                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="/public/image/home.png"
+            <a href="./menu.html">
+                <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="../public/image/home.png"
                     alt="home">
             </a>
         </div>
@@ -86,7 +88,7 @@
                     WEEK 1/52
                 </h1>
                 <div>
-                    <img class="w-5" src="/public/image/triangle.png" alt="triangle">
+                    <img class="w-5" src="../public/image/triangle.png" alt="triangle">
                 </div>
             </div>
 
@@ -98,11 +100,11 @@
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
                 class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
-                <img class="w-12 group-hover:scale-115 transition-transform" src="/public/image/paw.png" alt="paw">
+                <img class="w-12 group-hover:scale-115 transition-transform" src="../public/image/paw.png" alt="paw">
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
                 <li><a href="./profile.html">My profile</a></li>
-                <li><a id="btn-logout-nav">Logout</a></li>
+                <li><a id="btn-logout-nav" class="cursor-pointer">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -172,13 +174,11 @@
                 </div>
             </div>
 
-            <!-- Right Column -->
             <div class="flex flex-col gap-6">
 
-                <!-- UPCOMING DEADLINES (ขวาบน: สี Terracotta Rose #d98282) -->
                 <div class="bg-[#ce93a6] rounded-3xl p-2 shadow-xl flex flex-col">
                     <div class="flex items-center justify-center gap-2 font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
-                        <img src="/public/image/alert.png" class="w-6 h-6 object-contain brightness-200" alt="alert">
+                        <img src="../public/image/alert.png" class="w-6 h-6 object-contain brightness-200" alt="alert">
                         <span>UPCOMING DEADLINES</span>
                     </div>
                     <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
@@ -187,7 +187,6 @@
                     </div>
                 </div>
 
-                <!-- ACTIVE INSTALLMENTS (ขวาล่าง: สี Slate Sage #83a3a3) -->
                 <div class="bg-[#b5c99a] rounded-3xl p-2 shadow-xl flex flex-col">
                     <div class="text-center font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
                         ACTIVE INSTALLMENTS
