@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview Dashboard</title>
+    <title>Bank & Savings</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         @font-face {
             font-family: 'Pixellari';
-            /* แก้ path ฟอนต์ Pixellari */
+            /* แก้ไข Path ฟอนต์ */
             src: url('../public/font/pixellari/Pixellari.ttf') format('truetype');
         }
 
         @font-face {
             font-family: 'SOV_BokThang';
-            /* แก้ path ฟอนต์ SOV_BokThang */
+            /* แก้ไข Path ฟอนต์ */
             src: url('../public/font/SOV_BokThang/SOV_BokThang.ttf') format('truetype');
             size-adjust: 125%;
         }
@@ -45,37 +45,38 @@
             background: #d67b55;
         }
 
-        /* Animation แมวเดินลอยๆ ตามระยะที่กำหนด */
-        @keyframes floatWalkCat {
+        /* Keyframes อนิเมชันหยอดกระปุก */
+        @keyframes drop-coin {
             0% {
-                transform: translateX(10px) scaleX(-1);
+                transform: translateY(-40px) scale(0.5);
+                opacity: 0;
             }
 
             50% {
-                transform: translateX(450px) scaleX(-1);
-            }
-
-            51% {
-                transform: translateX(450px) scaleX(1);
+                opacity: 1;
             }
 
             100% {
-                transform: translateX(10px) scaleX(1);
+                transform: translateY(0) scale(1);
+                opacity: 1;
             }
         }
 
-        .animate-cat-floating {
-            animation: floatWalkCat 40s linear infinite;
+        .animate-drop {
+            animation: drop-coin 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel text-[#5c3d2e] pb-10">
+<!-- แก้ไข Path รูปพื้นหลัง -->
+<body class="flex flex-col min-h-screen bg-[url('../public/image/bg2.png')] font-pixel text-[#5c3d2e]">
 
+    <!-- Navbar -->
     <nav
         class="flex justify-between items-center bg-[#ffb6c1] p-3 px-10 fixed top-0 left-0 w-full shadow-md shadow-[#e5acb5] z-50">
         <div>
             <a href="./menu.html">
+                <!-- แก้ไข Path รูป home -->
                 <img class="w-9 hover:scale-115 active:scale-95 transition-transform" src="../public/image/home.png"
                     alt="home">
             </a>
@@ -88,6 +89,7 @@
                     WEEK 1/52
                 </h1>
                 <div>
+                    <!-- แก้ไข Path รูป triangle -->
                     <img class="w-5" src="../public/image/triangle.png" alt="triangle">
                 </div>
             </div>
@@ -100,6 +102,7 @@
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button"
                 class="bg-white rounded-full shadow-md shadow-[#e5acb5] cursor-pointer group active:scale-95">
+                <!-- แก้ไข Path รูป paw -->
                 <img class="w-12 group-hover:scale-115 transition-transform" src="../public/image/paw.png" alt="paw">
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-36 p-2 shadow-lg mt-1">
@@ -109,103 +112,173 @@
         </div>
     </nav>
 
-    <div class="pt-28 px-6 max-w-7xl mx-auto w-full flex flex-col gap-6">
+    <!-- Main -->
+    <div class="pt-28 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full max-w-7xl mx-auto items-start">
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
-                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
-                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Remaining Budget</span>
-                    <p id="dash-remaining" class="text-3xl font-black text-[#e88d67] mt-2">0 .-</p>
-                    <div class="text-xs text-gray-400 mt-1">Weekly Limit: <span id="dash-budget" class="font-bold text-[#5c3d2e]">0 .-</span></div>
-                </div>
+        <!-- Savings -->
+        <div
+            class="lg:col-span-4 flex flex-col items-center gap-4 bg-white/60 backdrop-blur-xs p-6 rounded-3xl border-2 border-[#ffced5] shadow-lg">
+            <div class="text-center">
+                <span
+                    class="text-xs bg-[#fbe4c0] text-[#9c7356] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Piggy Bank Lv. <span id="piggy-level">1</span>
+                </span>
+                <h2 class="text-xl font-bold text-[#dc7a5d] mt-1">SAVINGS PIGGY</h2>
             </div>
 
-            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
-                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
-                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Spent This Week</span>
-                    <p id="dash-spent" class="text-3xl font-black text-[#dc7a5d] mt-2">0 .-</p>
-                    <span class="text-xs text-gray-400 mt-1">Expenses + Installments</span>
-                </div>
+            <div class="relative w-52 h-52 flex justify-center items-center group">
+                <!-- แก้ไข Path รูป piggy bank -->
+                <img id="piggy-image" src="../public/image/bank/pig-0.jpg" alt="piggy bank"
+                    class="w-full h-full object-contain transition-transform group-hover:scale-105">
+                <div id="coin-anim" class="hidden absolute top-0 text-3xl">🪙</div>
             </div>
 
-            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
-                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
-                    <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Piggy Savings</span>
-                    <p id="dash-savings" class="text-3xl font-black text-[#6b9080] mt-2">0 .-</p>
-                    <span class="text-xs font-bold text-[#6b9080] mt-1 flex items-center gap-1.5">
-                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#ffb6c1]"></span> Total Saved In Bank
-                    </span>
-                </div>
+            <div class="bg-[#fbe4c0] px-8 py-2 rounded-2xl shadow-xs border border-[#f5ddb7] text-center w-full">
+                <p class="text-xs text-[#9c7356] font-bold uppercase">Total Savings</p>
+                <p id="total-savings" class="text-2xl font-bold text-[#5c3d2e]">0.-</p>
             </div>
 
-            <div class="bg-[#f0c2a8] rounded-3xl p-1.5 shadow-xl">
-                <div class="bg-white rounded-2xl p-4 h-full flex flex-col justify-between">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs font-bold text-[#9c7356] uppercase tracking-wider">Planner Tasks</span>
-                        <span id="dash-task-percent" class="font-black text-xs text-[#9c7356]">0%</span>
-                    </div>
-                    <div class="w-full bg-[#fbe4c0] h-3.5 rounded-full overflow-hidden mt-2 p-0.5 border border-[#f0d8c2]">
-                        <div id="dash-task-progress" class="bg-[#e88d67] h-full rounded-full transition-all duration-300 w-0"></div>
-                    </div>
-                    <span id="dash-task-count" class="text-xs font-bold text-gray-400 mt-1 text-right">0/0 Completed</span>
-                </div>
-            </div>
-
+            <button id="btn-collect-week"
+                class="w-full bg-[#ffb6c1] hover:bg-[#ffa4b2] text-white font-bold py-2.5 px-4 rounded-2xl shadow-md active:scale-95 transition-all flex justify-center items-center gap-2 cursor-pointer">
+                <span>COLLECT WEEKLY REMAINING</span>
+            </button>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Daily expenses -->
+        <div
+            class="lg:col-span-5 flex flex-col bg-white rounded-3xl shadow-lg overflow-hidden min-h-[460px] justify-between">
 
-            <div class="lg:col-span-2 bg-[#9c7356] rounded-3xl p-2 shadow-xl flex flex-col justify-between relative">
-                <div class="text-center font-bold text-white text-lg tracking-wider my-1 uppercase">
-                    DAILY EXPENSE TREND
+            <div class="bg-[#ffced5] p-4 text-white">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 id="selected-day-label" class="font-bold text-xl tracking-wider">-</h3>
+                    <div class="text-right">
+                        <span class="text-xs block opacity-80">Remaining Budget</span>
+                        <span id="day-remaining-budget" class="font-bold text-lg">0.-</span>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-4 flex-1 flex flex-col justify-between relative overflow-hidden">
-                    <div class="h-64 relative w-full">
-                        <canvas id="expenseChart"></canvas>
-                    </div>
-
-                    <div class="absolute bottom-1 left-2 pointer-events-none z-10">
-                        <div class="animate-cat-floating w-18 h-18">
-                            <div class="tenor-gif-embed" data-postid="14565873" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
-                        </div>
-                    </div>
+                <div id="day-buttons"
+                    class="flex justify-between gap-1 bg-white/20 p-1 rounded-2xl text-xs text-center">
                 </div>
             </div>
 
-            <div class="flex flex-col gap-6">
-
-                <div class="bg-[#ce93a6] rounded-3xl p-2 shadow-xl flex flex-col">
-                    <div class="flex items-center justify-center gap-2 font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
-                        <img src="../public/image/alert.png" class="w-6 h-6 object-contain brightness-200" alt="alert">
-                        <span>UPCOMING DEADLINES</span>
-                    </div>
-                    <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
-                        <div id="dash-deadline-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-[#b5c99a] rounded-3xl p-2 shadow-xl flex flex-col">
-                    <div class="text-center font-bold text-white text-sm tracking-wider my-1 uppercase drop-shadow-sm">
-                        ACTIVE INSTALLMENTS
-                    </div>
-                    <div class="bg-white rounded-2xl p-3 flex flex-col gap-2">
-                        <div id="dash-installment-list" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar">
-                        </div>
-                    </div>
-                </div>
-
+            <div id="expense-list" class="p-4 flex-1 flex flex-col gap-2 max-h-64 overflow-y-auto custom-scrollbar">
             </div>
 
+            <div class="p-4 border-t border-[#fbe4c0] flex justify-between items-center bg-[#fef8f0]">
+                <button id="btn-add-expense"
+                    class="flex items-center gap-2 bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-2 px-6 rounded-2xl active:scale-95 shadow-xs cursor-pointer">
+                    <!-- แก้ไข Path รูป add -->
+                    <img width="35" src="../public/image/bank/add.png" alt="add">
+                    <span>ADD EXPENSE</span>
+                </button>
+
+                <div class="text-right">
+                    <span class="text-xs text-[#9c7356] block">Total Daily Expense</span>
+                    <span id="daily-expense-total" class="font-bold text-lg text-[#dc7a5d]">0.-</span>
+                </div>
+            </div>
         </div>
 
+        <!-- Installments -->
+        <div class="lg:col-span-3 flex flex-col gap-4">
+            <div
+                class="bg-white p-5 rounded-3xl border-2 border-[#ffced5] shadow-lg flex flex-col justify-between h-[360px]">
+                <div>
+                    <div class="flex justify-between items-center border-b-2 border-[#fbe4c0] pb-2 mb-3">
+                        <h3 class="font-bold text-lg text-[#dc7a5d]">INSTALLMENT</h3>
+                        <button id="btn-add-installment"
+                            class="text-xs bg-[#fbe4c0] hover:bg-[#f5ddb7] px-2.5 py-1 rounded-xl font-bold text-[#9c7356] cursor-pointer">
+                            + NEW
+                        </button>
+                    </div>
+
+                    <div id="installment-list"
+                        class="flex flex-col gap-2.5 max-h-56 overflow-y-auto custom-scrollbar pr-1">
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-[#fbe4c0] text-center">
+                    <span class="text-xs text-gray-400">Total Weekly Installment: </span>
+                    <span id="weekly-installment-total" class="font-bold text-[#dc7a5d]">0.-</span>
+                </div>
+            </div>
+
+            <a id="btn-dashboard" href="./dashboard.html"
+                class="w-full bg-[#9c7356] hover:bg-[#866045] text-white font-bold py-3 px-4 rounded-3xl shadow-md active:scale-95 transition-all flex justify-center items-center gap-2 cursor-pointer text-center">
+                <span>VIEW DASHBOARD</span>
+            </a>
+        </div>
     </div>
 
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <!-- ADD EXPENSE -->
+    <dialog id="add_expense_modal" class="modal">
+        <div class="modal-box bg-white rounded-3xl p-6 max-w-sm flex flex-col items-center gap-4 text-[#5c3d2e]">
+            <h3 class="font-bold text-xl uppercase tracking-wider text-[#dc7a5d]">ADD DAILY EXPENSE</h3>
 
-    <script type="module" src="./dashboard.js"></script>
+            <input id="expense-name" type="text" placeholder="Expense name..."
+                class="w-full px-4 py-2 text-center rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d] placeholder-[#e0bba1]">
+
+            <input id="expense-amount" type="number" min="0" step="0.01" placeholder="Amount (THB)..."
+                class="w-full px-4 py-2 text-center rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d] placeholder-[#e0bba1]">
+
+            <div class="flex gap-2 w-full justify-center mt-2">
+                <button id="btn-save-expense" type="button"
+                    class="bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-1.5 px-8 rounded-2xl active:scale-95 shadow-xs cursor-pointer">
+                    SAVE
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/30">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <!-- ADD INSTALLMENT -->
+    <dialog id="add_installment_modal" class="modal">
+        <div class="modal-box bg-white rounded-3xl p-6 max-w-md flex flex-col gap-4 text-[#5c3d2e]">
+            <h3 class="font-bold text-xl uppercase tracking-wider text-[#dc7a5d] text-center">
+                ADD INSTALLMENT
+            </h3>
+
+            <div class="flex flex-col gap-3">
+                <label class="text-xs font-bold text-[#9c7356]">Item Name</label>
+                <input id="installment-name" type="text" placeholder="e.g. Shoes, Electricity Bill"
+                    class="w-full px-4 py-2 rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d]">
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-[#9c7356]">Total Price (THB)</label>
+                        <input id="installment-total" type="number" min="0" step="0.01" placeholder="500"
+                            class="w-full px-4 py-2 rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d]">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-[#9c7356]">Weeks Count</label>
+                        <input id="installment-weeks" type="number" min="1" step="1" placeholder="10"
+                            class="w-full px-4 py-2 rounded-full border-2 border-[#fbe4c0] focus:outline-none focus:border-[#dc7a5d]">
+                    </div>
+                </div>
+
+                <div class="bg-[#fef8f0] p-3 rounded-2xl border border-[#fbe4c0] text-center text-xs text-[#9c7356]">
+                    Average per week:
+                    <span id="installment-average" class="font-bold text-[#dc7a5d] text-sm">0.- / week</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-2">
+                <button id="btn-create-installment" type="button"
+                    class="bg-[#fbe4c0] hover:bg-[#f5ddb7] text-[#9c7356] font-bold py-2 px-8 rounded-2xl active:scale-95 shadow-xs cursor-pointer">
+                    CREATE PLAN
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/30">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <!-- แก้ไข Path สคริปต์หลักของ Bank -->
+    <script type="module" src="./bank.js"></script>
 </body>
 
 </html>
